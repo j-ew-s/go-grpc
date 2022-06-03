@@ -15,12 +15,13 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	err = grpcServer.Serve(lis)
-	if err != nil {
-		log.Fatalf("Error start serving GRPC serve  : %v", err)
-	}
 
 	chatService := chat.Server{}
 
 	chat.RegisterChatServiceServer(grpcServer, &chatService)
+
+	err = grpcServer.Serve(lis)
+	if err != nil {
+		log.Fatalf("Error start serving GRPC serve  : %v", err)
+	}
 }
